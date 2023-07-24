@@ -10,13 +10,9 @@ const ListaEmpleados = (listaEmpleados) => {
           .map((itemEmpleado) => itemEmpleado)
           .map((item) =>
             item.map((empleados, i) => (
-              //   console.log(empleados);
               <ItemEmpleado key={i} empleados={empleados}></ItemEmpleado>
             ))
           )}
-        {/* {listaEmpleados.listaEmpleados.map((itemEmpleado) =>
-          itemEmpleado.map((item, i) => <ItemEmpleado key={i}></ItemEmpleado>)
-        )} */}
       </section>
     </ListGroup>
   );

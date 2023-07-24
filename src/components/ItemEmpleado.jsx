@@ -1,6 +1,5 @@
 import React from "react";
 import EmpleadoAvatar from "./EmpleadoAvatar";
-import { ListGroup } from "react-bootstrap";
 
 const ItemEmpleado = (empleados) => {
   return (

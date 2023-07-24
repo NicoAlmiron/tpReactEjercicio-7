@@ -3,7 +3,6 @@ import { Card } from "react-bootstrap";
 
 const EmpleadoAvatar = (pic) => {
   return (
-    // <div>{console.log(pic.pic)}</div>
     <Card
       className="d-flex justify-content-center aling-items-center"
       style={{
