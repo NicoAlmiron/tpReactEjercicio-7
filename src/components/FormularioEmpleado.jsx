@@ -24,8 +24,10 @@ const useEmpleados = () => {
   ];
   const [listaEmpleados, setListaEmpleados] = useState(empleados);
 
-  const handleChange = (e) => {
-    e.preventDefault();
+  const handleChange = (event) => {
+    (event) => {
+      event.preventDefault(event);
+    };
 
     setListaEmpleados([...listaEmpleados, arregloEmpleado]);
 
@@ -33,10 +35,11 @@ const useEmpleados = () => {
     setDepartment("");
     setTitle("");
     setPic("");
-    setId(sumaId + 1);
+    setId([id + 1]);
 
     empleados.push(arregloEmpleado);
     localStorage.setItem("empleados", JSON.stringify(empleados));
+    event.reset();
   };
   return {
     arregloEmpleado,
