@@ -1,17 +1,18 @@
 import React from "react";
+import { Card } from "react-bootstrap";
 
-const EmpleadoAvatar = () => {
+const EmpleadoAvatar = (pic) => {
   return (
-    <div
+    // <div>{console.log(pic.pic)}</div>
+    <Card
+      className="d-flex justify-content-center aling-items-center"
       style={{
         width: "7rem",
         height: "7rem",
-        backgroundImage:
-          "url(https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg)",
+        backgroundImage: "url(" + pic.pic + ")",
         backgroundSize: "cover",
       }}
-      className=" rounded-2"
-    ></div>
+    ></Card>
   );
 };
 
