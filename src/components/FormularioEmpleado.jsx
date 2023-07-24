@@ -5,11 +5,12 @@ import EmpleadoAvatar from "./EmpleadoAvatar";
 
 const useEmpleados = () => {
   const empleados = JSON.parse(localStorage.getItem("empleados")) || [];
+  let sumaId = 0;
 
   const [fullName, setFullName] = useState("");
   const [title, setTitle] = useState("");
   const [pic, setPic] = useState("");
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(sumaId);
   const [department, setDepartment] = useState("");
 
   const arregloEmpleado = [
@@ -32,6 +33,7 @@ const useEmpleados = () => {
     setDepartment("");
     setTitle("");
     setPic("");
+    setId(sumaId + 1);
 
     empleados.push(arregloEmpleado);
     localStorage.setItem("empleados", JSON.stringify(empleados));
@@ -103,18 +105,13 @@ const FormularioEmpleado = () => {
                   required
                 ></Form.Control>
               </div>
-              <div className="col-6 mb-3">
+              <div className="col-6 mb-3 d-flex">
                 <Form.Control
                   type="text"
                   placeholder="Cargo del empleado"
                   defaultValue={arregloEmpleados.title}
                   onChange={(e) => arregloEmpleados.setTitle(e.target.value)}
                 ></Form.Control>
-              </div>
-              <div className="col-6 mb-3" defaultValue={arregloEmpleados.id}>
-                <h3 className="display-6 text-warning">
-                  ID: {arregloEmpleados.id}
-                </h3>
               </div>
             </Form.Group>
             <div className="text-end pb-2 pt-2">
