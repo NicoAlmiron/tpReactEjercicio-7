@@ -1,17 +1,60 @@
-import React from "react";
-import { Button, Card, Container, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Form } from "react-bootstrap";
 import ListaEmpleados from "./ListaEmpleados";
+import EmpleadoAvatar from "./EmpleadoAvatar";
+
+const useEmpleados = () => {
+  const empleados = JSON.parse(localStorage.getItem("empleados")) || [];
+
+  const [fullName, setFullName] = useState("");
+  const [title, setTitle] = useState("");
+  const [pic, setPic] = useState("");
+  const [id, setId] = useState(1);
+  const [department, setDepartment] = useState("");
+
+  const arregloEmpleado = [
+    {
+      fullName: fullName,
+      title: title,
+      pic: pic,
+      department: department,
+      id: id,
+    },
+  ];
+  const [listaEmpleados, setListaEmpleados] = useState(empleados);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+
+    setListaEmpleados([...listaEmpleados, arregloEmpleado]);
+
+    setFullName("");
+    setDepartment("");
+    setTitle("");
+    setPic("");
+
+    empleados.push(arregloEmpleado);
+    localStorage.setItem("empleados", JSON.stringify(empleados));
+  };
+  return {
+    arregloEmpleado,
+    handleChange,
+    fullName,
+    title,
+    pic,
+    id,
+    department,
+    setFullName,
+    setId,
+    setPic,
+    setDepartment,
+    setTitle,
+    listaEmpleados,
+  };
+};
 
 const FormularioEmpleado = () => {
-  // class empleado {
-  //   constructor(id, fullName, title, department, pic) {
-  //     this.id = id;
-  //     this.fullName = fullName;
-  //     this.title = title;
-  //     this.department = department;
-  //     this.pic = pic;
-  //   }
-  // }
+  const arregloEmpleados = useEmpleados();
   return (
     <>
       <section className="border border-dark border-2 rounded-3 my-5 p-3 bg-secondary">
@@ -19,53 +62,72 @@ const FormularioEmpleado = () => {
           <h3 className="display-3 pt-3 pb-2 ps-2 text-info text-center">
             Registro de Empleados
           </h3>
-          <Form className="d-flex justify-content-end flex-column">
+          <Form
+            className="d-flex justify-content-end flex-column"
+            onSubmit={arregloEmpleados.handleChange}
+          >
             <Form.Group
               className="d-flex row py-2 align-items-center border border-warning rounded-3 bg-dark"
-              controlId=""
+              controlId="empleado"
             >
               <div className="col-5 d-flex justify-content-center aling-items-center my-3">
-                <Card style={{ width: "8rem", height: "8rem" }}></Card>
+                <EmpleadoAvatar pic={arregloEmpleados.pic}></EmpleadoAvatar>
               </div>
               <div className="col-7">
                 <Form.Control
                   type="text"
                   placeholder="Nombre completo"
                   autoFocus
+                  defaultValue={arregloEmpleados.fullName}
+                  onChange={(e) => arregloEmpleados.setFullName(e.target.value)}
+                  required
                 ></Form.Control>
               </div>
               <div className="col-6 mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Link del avatar"
-                  autoFocus
+                  defaultValue={arregloEmpleados.pic}
+                  onChange={(e) => arregloEmpleados.setPic(e.target.value)}
+                  required
                 ></Form.Control>
               </div>
               <div className="col-6 mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Area operativa del empleado"
-                  autoFocus
+                  defaultValue={arregloEmpleados.department}
+                  onChange={(e) =>
+                    arregloEmpleados.setDepartment(e.target.value)
+                  }
+                  required
                 ></Form.Control>
               </div>
               <div className="col-6 mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Cargo del empleado"
-                  autoFocus
+                  defaultValue={arregloEmpleados.title}
+                  onChange={(e) => arregloEmpleados.setTitle(e.target.value)}
                 ></Form.Control>
               </div>
-              <div className="col-6 mb-3">
-                <h3 className="display-5">ID: 0</h3>
+              <div className="col-6 mb-3" defaultValue={arregloEmpleados.id}>
+                <h3 className="display-6 text-warning">
+                  ID: {arregloEmpleados.id}
+                </h3>
               </div>
             </Form.Group>
             <div className="text-end pb-2 pt-2">
-              <Button variant="primary">Guardar</Button>
+              <Button variant="primary" type="submit">
+                Guardar
+              </Button>
             </div>
           </Form>
         </article>
       </section>
-      <ListaEmpleados></ListaEmpleados>
+      <ListaEmpleados
+        listaEmpleados={arregloEmpleados.listaEmpleados}
+      ></ListaEmpleados>
     </>
   );
 };

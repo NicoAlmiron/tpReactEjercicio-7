@@ -1,20 +1,21 @@
 import React from "react";
 import EmpleadoAvatar from "./EmpleadoAvatar";
+import { ListGroup } from "react-bootstrap";
 
-const ItemEmpleado = () => {
+const ItemEmpleado = (empleados) => {
   return (
     <section className="d-flex row border border-dark border-2 rounded-3 p-2 m-3 bg-secondary ">
       <article className="col-4 pt-2">
-        <EmpleadoAvatar></EmpleadoAvatar>
+        <EmpleadoAvatar pic={empleados.empleados.pic}></EmpleadoAvatar>
       </article>
       <article className="col-8">
-        <div className="mb-4">
-          <h4 className="display-6">Nombre Empleado</h4>
+        <div className="mb-4 mt-2 text-start">
+          <h3 className="fw-light">{empleados.empleados.fullName}</h3>
         </div>
-        <div className="pt-3 d-flex">
-          <h5 className="pe-5 fw-light">Cargo</h5>
+        <div className="pt-3 d-flex justify-content-between aling-items-center">
+          <h5 className="">{empleados.empleados.title}</h5>
           <p className="border p-1 border-warning text-warning bg-dark rounded-2">
-            Area Operativa
+            {empleados.empleados.department}
           </p>
         </div>
       </article>
